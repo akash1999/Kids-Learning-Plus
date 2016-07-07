@@ -73,13 +73,20 @@ public class abcActivity extends Activity {
                     }
                 });
 
-                alphabet_switcher.setImageResource(R.drawable.bb);
+                alphabet_switcher.setImageResource(R.drawable.alphabet_a);
                 Animation in = AnimationUtils.loadAnimation(abcActivity.this, android.R.anim.fade_in),
                         out = AnimationUtils.loadAnimation(abcActivity.this, android.R.anim.fade_out);
                 alphabet_switcher.setInAnimation(in);
                 alphabet_switcher.setOutAnimation(out);
 
-                int[] imagesId = {R.drawable.bb};
+                int[] imagesId = {
+                        R.drawable.alphabet_a, R.drawable.alphabet_b, R.drawable.alphabet_c, R.drawable.alphabet_d,
+                        R.drawable.alphabet_e, R.drawable.alphabet_f, R.drawable.alphabet_g, R.drawable.alphabet_h,
+                        R.drawable.alphabet_i, R.drawable.alphabet_j, R.drawable.alphabet_k, R.drawable.alphabet_l,
+                        R.drawable.alphabet_m, R.drawable.alphabet_n, R.drawable.alphabet_o, R.drawable.alphabet_p,
+                        R.drawable.alphabet_q, R.drawable.alphabet_r, R.drawable.alphabet_s, R.drawable.alphabet_t,
+                        R.drawable.alphabet_u, R.drawable.alphabet_v, R.drawable.alphabet_w, R.drawable.alphabet_x,
+                        R.drawable.alphabet_y, R.drawable.alphabet_z};
 
                 imageBundle = new ImageHandler(alphabet_switcher);
                 imageBundle.setImageLibrary(imagesId);
