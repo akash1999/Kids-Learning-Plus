@@ -101,11 +101,11 @@ class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        float senstivity = 50;
+        float sensitivity = 50;
 
-        if ((e1.getX() - e2.getX()) > senstivity) {                   //On swiping left
+        if ((e1.getX() - e2.getX()) > sensitivity) {                   //On swiping left
             abcActivity.imageBundle.mNextImage();
-        } else if ((e2.getX() - e1.getX()) > senstivity) {            //On swiping right
+        } else if ((e2.getX() - e1.getX()) > sensitivity) {            //On swiping right
             abcActivity.imageBundle.mPrevImage();
         }
         return true;
