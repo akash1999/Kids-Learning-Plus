@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.view.GestureDetector;
@@ -17,6 +18,7 @@ public class abcActivity extends Activity {
 
     static ImageHandler imageBundle;
     private GestureDetectorCompat mDetector;
+    private boolean isBelowKitkat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +34,22 @@ public class abcActivity extends Activity {
         super.onResume();
 
         //Setting immersive sticky flag for android kitkat and above
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (!isBelowKitkat) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                     View.SYSTEM_UI_FLAG_FULLSCREEN);
+        } else {
+            //Make Navigation bar dim on api 18 and below
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
+        if (isBelowKitkat) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+        }
         return super.onTouchEvent(event);
     }
 
@@ -55,11 +63,12 @@ public class abcActivity extends Activity {
      * To Initialise some things on new thread
      */
     private void initialise() {
-        Thread th = new Thread(new Runnable() {
+        Thread load = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
+                isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
 
+                ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
                 alphabet_switcher.setFactory(new ViewSwitcher.ViewFactory() {
                     @Override
                     public View makeView() {
@@ -78,14 +87,13 @@ public class abcActivity extends Activity {
                         R.drawable.alphabet_q, R.drawable.alphabet_r, R.drawable.alphabet_s, R.drawable.alphabet_t,
                         R.drawable.alphabet_u, R.drawable.alphabet_v, R.drawable.alphabet_w, R.drawable.alphabet_x,
                         R.drawable.alphabet_y, R.drawable.alphabet_z};
-
                 imageBundle = new ImageHandler(abcActivity.this, alphabet_switcher);
                 imageBundle.setImageLibrary(imagesId);
             }
         });
-        th.start();
+        load.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
+        load.start();
     }
-
 }
 
 
