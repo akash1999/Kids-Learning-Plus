@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
@@ -18,7 +16,6 @@ import android.widget.ViewSwitcher;
 public class abcActivity extends Activity {
 
     static ImageHandler imageBundle;
-
     private GestureDetectorCompat mDetector;
 
     @Override
@@ -26,7 +23,7 @@ public class abcActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc_activity);
 
-        mDetector = new GestureDetectorCompat(this, new SwipeGesture());
+        mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
         initialise();
     }
 
@@ -50,7 +47,7 @@ public class abcActivity extends Activity {
 
     public void launchMainMenu(View view) {
         imageBundle = null;
-        Intent intent = new Intent(this, MainMenu.class);
+        Intent intent = new Intent(abcActivity.this, MainMenu.class);
         startActivity(intent);
     }
 
@@ -61,23 +58,17 @@ public class abcActivity extends Activity {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
-                final ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
+                ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
 
                 alphabet_switcher.setFactory(new ViewSwitcher.ViewFactory() {
                     @Override
                     public View makeView() {
-                        ImageView myView = new ImageView(getApplicationContext());
+                        ImageView myView = new ImageView(abcActivity.this);
                         myView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         myView.setLayoutParams(new ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
                         return myView;
                     }
                 });
-
-                alphabet_switcher.setImageResource(R.drawable.alphabet_a);
-                Animation in = AnimationUtils.loadAnimation(abcActivity.this, android.R.anim.fade_in),
-                        out = AnimationUtils.loadAnimation(abcActivity.this, android.R.anim.fade_out);
-                alphabet_switcher.setInAnimation(in);
-                alphabet_switcher.setOutAnimation(out);
 
                 int[] imagesId = {
                         R.drawable.alphabet_a, R.drawable.alphabet_b, R.drawable.alphabet_c, R.drawable.alphabet_d,
@@ -88,7 +79,7 @@ public class abcActivity extends Activity {
                         R.drawable.alphabet_u, R.drawable.alphabet_v, R.drawable.alphabet_w, R.drawable.alphabet_x,
                         R.drawable.alphabet_y, R.drawable.alphabet_z};
 
-                imageBundle = new ImageHandler(alphabet_switcher);
+                imageBundle = new ImageHandler(abcActivity.this, alphabet_switcher);
                 imageBundle.setImageLibrary(imagesId);
             }
         });
@@ -100,7 +91,6 @@ public class abcActivity extends Activity {
 
 // Used to detect Gestures and changing images accordingly
 class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
-
     @Override
     public boolean onDown(MotionEvent event) {
         return true;
