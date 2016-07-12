@@ -1,6 +1,8 @@
 package com.akdevelopers.kidslearningplus;
 
 import android.content.Context;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 
 
@@ -12,7 +14,8 @@ class ImageHandler {
     private byte prevImageIndex;
     private int[] imageLibrary;     //array to store image resource id's
     private Context mContext;
-
+    private Animation slideInLeft, slideOutLeft,
+            slideInRight, slideOutRight;
     /**
      * @param context Context of calling object
      * @param frame Object referring to ImageSwitcher object
@@ -35,11 +38,19 @@ class ImageHandler {
         currentImageIndex = 0;
         nextImageIndex = 1;
         prevImageIndex = (byte) (a.length - 1);
+        initialiseAnimation();
+    }
+
+    private void initialiseAnimation() {
+        slideInRight = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_right);
+        slideOutRight = AnimationUtils.loadAnimation(mContext, R.anim.slide_out_right);
+        slideInLeft = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_left);
+        slideOutLeft = AnimationUtils.loadAnimation(mContext, R.anim.slide_out_left);
     }
 
     public void mNextImage() {
-        mFrame.setInAnimation(mContext, R.anim.slide_in_right);
-        mFrame.setOutAnimation(mContext, R.anim.slide_out_left);
+        mFrame.setInAnimation(slideInRight);
+        mFrame.setOutAnimation(slideOutLeft);
 
         if (nextImageIndex < imageLibrary.length) {
             mFrame.setImageResource(imageLibrary[nextImageIndex]);
@@ -55,8 +66,8 @@ class ImageHandler {
     }
 
     public void mPrevImage() {
-        mFrame.setInAnimation(mContext, R.anim.slide_in_left);
-        mFrame.setOutAnimation(mContext, R.anim.slide_out_right);
+        mFrame.setInAnimation(slideInLeft);
+        mFrame.setOutAnimation(slideOutRight);
 
         if (prevImageIndex != -1) {
             mFrame.setImageResource(imageLibrary[prevImageIndex]);
