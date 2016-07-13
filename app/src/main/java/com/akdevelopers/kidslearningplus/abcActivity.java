@@ -74,7 +74,7 @@ public class abcActivity extends Activity {
                     @Override
                     public View makeView() {
                         ImageView myView = new ImageView(abcActivity.this);
-                        myView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        myView.setScaleType(ImageView.ScaleType.FIT_XY);
                         myView.setLayoutParams(new ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
                         return myView;
                     }
