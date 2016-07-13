@@ -34,11 +34,14 @@ class ImageHandler {
         imageLibrary = new int[a.length];
         System.arraycopy(a, 0, imageLibrary, 0, imageLibrary.length);
 
-        mFrame.setImageResource(imageLibrary[0]);
         currentImageIndex = 0;
         nextImageIndex = 1;
         prevImageIndex = (byte) (a.length - 1);
         initialiseAnimation();
+    }
+
+    public void loadFirst() {
+        mFrame.setImageResource(imageLibrary[0]);
     }
 
     private void initialiseAnimation() {

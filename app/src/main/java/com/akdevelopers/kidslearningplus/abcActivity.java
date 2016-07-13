@@ -25,8 +25,9 @@ public class abcActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc_activity);
 
-        mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
         initialise();
+        mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
+        isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class abcActivity extends Activity {
         Thread load = new Thread(new Runnable() {
             @Override
             public void run() {
-                isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
                 ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
                 alphabet_switcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -78,6 +79,7 @@ public class abcActivity extends Activity {
                         return myView;
                     }
                 });
+                imageBundle = new ImageHandler(abcActivity.this, alphabet_switcher);
 
                 int[] imagesId = {
                         R.drawable.alphabet_a, R.drawable.alphabet_b, R.drawable.alphabet_c, R.drawable.alphabet_d,
@@ -87,11 +89,16 @@ public class abcActivity extends Activity {
                         R.drawable.alphabet_q, R.drawable.alphabet_r, R.drawable.alphabet_s, R.drawable.alphabet_t,
                         R.drawable.alphabet_u, R.drawable.alphabet_v, R.drawable.alphabet_w, R.drawable.alphabet_x,
                         R.drawable.alphabet_y, R.drawable.alphabet_z};
-                imageBundle = new ImageHandler(abcActivity.this, alphabet_switcher);
+
                 imageBundle.setImageLibrary(imagesId);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageBundle.loadFirst();
+                    }
+                });
             }
         });
-        load.setPriority(Process.THREAD_PRIORITY_BACKGROUND);
         load.start();
     }
 }
@@ -106,7 +113,7 @@ class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        float sensitivity = 50;
+        float sensitivity = 100;
 
         if ((e1.getX() - e2.getX()) > sensitivity) {                   //On swiping left
             abcActivity.imageBundle.mNextImage();
