@@ -12,11 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.ViewSwitcher;
+
 
 public class abcActivity extends Activity {
-
-    static ImageHandler imageBundle;
+    private ImageHandler imageBundle;
     private GestureDetectorCompat mDetector;
     private boolean isBelowKitkat;
 
@@ -24,10 +23,14 @@ public class abcActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc_activity);
-
         initialise();
-        mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
         isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
     }
 
     @Override
@@ -46,8 +49,17 @@ public class abcActivity extends Activity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        mDetector = null;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        this.mDetector.onTouchEvent(event);
+        if (mDetector != null) {
+            this.mDetector.onTouchEvent(event);
+        }
+
         if (isBelowKitkat) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
@@ -58,6 +70,13 @@ public class abcActivity extends Activity {
         imageBundle = null;
         Intent intent = new Intent(abcActivity.this, MainMenu.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     /**
@@ -70,15 +89,12 @@ public class abcActivity extends Activity {
                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
                 ImageSwitcher alphabet_switcher = (ImageSwitcher) findViewById(R.id.alphabet_switcher);
-                alphabet_switcher.setFactory(new ViewSwitcher.ViewFactory() {
-                    @Override
-                    public View makeView() {
-                        ImageView myView = new ImageView(abcActivity.this);
-                        myView.setScaleType(ImageView.ScaleType.FIT_XY);
-                        myView.setLayoutParams(new ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
-                        return myView;
-                    }
-                });
+
+                alphabet_switcher.addView(new ImageView(abcActivity.this),
+                        new ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+                alphabet_switcher.addView(new ImageView(abcActivity.this),
+                        new ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+
                 imageBundle = new ImageHandler(abcActivity.this, alphabet_switcher);
 
                 int[] imagesId = {
@@ -101,25 +117,39 @@ public class abcActivity extends Activity {
         });
         load.start();
     }
-}
 
+    // Used to detect Gestures and changing images accordingly
+    class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
+        private int counter = 0;
 
-// Used to detect Gestures and changing images accordingly
-class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
-    @Override
-    public boolean onDown(MotionEvent event) {
-        return true;
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        float sensitivity = 100;
-
-        if ((e1.getX() - e2.getX()) > sensitivity) {                   //On swiping left
-            abcActivity.imageBundle.mNextImage();
-        } else if ((e2.getX() - e1.getX()) > sensitivity) {            //On swiping right
-            abcActivity.imageBundle.mPrevImage();
+        @Override
+        public boolean onDown(MotionEvent event) {
+            return true;
         }
-        return true;
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            float sensitivity = 100, eSensitivity = 300;
+
+            if ((e2.getY() - e1.getY()) > eSensitivity) {
+                if (counter == 4) {
+                    Intent intent = new Intent(abcActivity.this, EasterEgg.class);
+                    startActivity(intent);
+                } else {
+                    counter++;
+                }
+            }
+
+            if ((e1.getX() - e2.getX()) > sensitivity) {                   //On swiping left
+                imageBundle.mNextImage();
+                counter = 0;
+            } else if ((e2.getX() - e1.getX()) > sensitivity) {            //On swiping right
+                imageBundle.mPrevImage();
+                counter = 0;
+            }
+            return true;
+        }
     }
 }
+
+
