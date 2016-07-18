@@ -16,11 +16,11 @@
         android:id="@+id/alphabet_switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp" />
+        android:layout_margin="25dp" />
 
     <ImageButton
-        android:layout_width="320dp"
-        android:layout_height="42dp"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
