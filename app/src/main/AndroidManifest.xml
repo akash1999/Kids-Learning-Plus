@@ -7,7 +7,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".abcActivity"
             android:parentActivityName=".MainMenu"
@@ -16,7 +15,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
         </activity>
-
         <activity
             android:name=".MainMenu"
             android:screenOrientation="sensorLandscape">
@@ -25,6 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".EasterEgg"
+            android:screenOrientation="sensorLandscape">
+
         </activity>
     </application>
 
