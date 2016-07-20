@@ -18,6 +18,8 @@ public class abcActivity extends Activity {
     private ImageHandler imageBundle;
     private GestureDetectorCompat mDetector;
     private boolean isBelowKitkat;
+    private View decorView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class abcActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        decorView = getWindow().getDecorView();
         mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
     }
 
@@ -39,12 +42,12 @@ public class abcActivity extends Activity {
 
         //Setting immersive sticky flag for android kitkat and above
         if (!isBelowKitkat) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                     View.SYSTEM_UI_FLAG_FULLSCREEN);
         } else {
             //Make Navigation bar dim on api 18 and below
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
     }
 
@@ -52,6 +55,7 @@ public class abcActivity extends Activity {
     protected void onStop() {
         super.onStop();
         mDetector = null;
+        decorView = null;
     }
 
     @Override
@@ -61,7 +65,7 @@ public class abcActivity extends Activity {
         }
 
         if (isBelowKitkat) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
         return super.onTouchEvent(event);
     }
@@ -76,6 +80,8 @@ public class abcActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(abcActivity.this, MainMenu.class);
+        startActivity(intent);
         finish();
     }
 
