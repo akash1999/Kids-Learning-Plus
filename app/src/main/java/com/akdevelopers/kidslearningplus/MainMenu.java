@@ -18,7 +18,9 @@ public class MainMenu extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.fade_in, R.anim.slide_out_right);
         setContentView(R.layout.activity_main_menu);
+
 
         isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
     }

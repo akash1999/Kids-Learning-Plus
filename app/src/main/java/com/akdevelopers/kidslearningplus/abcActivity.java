@@ -24,7 +24,10 @@ public class abcActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_in_right, android.R.anim.fade_out);
         setContentView(R.layout.activity_abc_activity);
+
+
         initialise();
         isBelowKitkat = (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
     }
