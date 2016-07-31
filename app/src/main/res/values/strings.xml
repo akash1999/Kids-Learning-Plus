@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Kids Learning plus</string>
-    <string name="next_alphabet">Next</string>
-    <string name="prev_alphabet">Previous</string>
-    <string name="image_description">Image</string>
-    <string name="title_activity_main_menu">MainMenu</string>
-    <string name="learn_abc">Learn ABC</string>
+    <string name="background_image">Background Image</string>
+    <string name="main_menu_label">Main Menu</string>
 </resources>

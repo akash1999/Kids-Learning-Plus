@@ -9,6 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/background_image"
         android:scaleType="fitXY"
         android:src="@drawable/alphabet_background" />
 
@@ -16,15 +17,16 @@
         android:id="@+id/alphabet_switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="25dp" />
+        android:layout_margin="@dimen/imageSwitcher_margin" />
 
     <ImageButton
-        android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_width="@dimen/abc_mMenu_btn_width"
+        android:layout_height="@dimen/abc_mMenu_btn_height"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/abcActivity_btn_top_margin"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/main_menu_label"
         android:onClick="launchMainMenu"
         android:scaleType="centerInside"
         android:src="@drawable/main_menu_button_state" />
