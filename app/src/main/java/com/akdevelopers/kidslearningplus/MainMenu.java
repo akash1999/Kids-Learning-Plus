@@ -76,6 +76,7 @@ public class MainMenu extends Activity {
         return super.onTouchEvent(event);
     }
 
+    @SuppressWarnings({"unused", "UnusedParameters"})
     public void launchAbcActivity(View view) {
         Intent abc_Activity = new Intent(this, abcActivity.class);
         startActivity(abc_Activity);

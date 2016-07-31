@@ -73,6 +73,7 @@ public class abcActivity extends Activity {
         return super.onTouchEvent(event);
     }
 
+    @SuppressWarnings({"unused", "UnusedParameters"})
     public void launchMainMenu(View view) {
         imageBundle = null;
         Intent intent = new Intent(abcActivity.this, MainMenu.class);

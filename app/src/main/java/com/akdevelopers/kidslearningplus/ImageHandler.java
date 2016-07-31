@@ -13,6 +13,7 @@ class ImageHandler {
     private byte currentImageIndex;
     private byte prevImageIndex;
     private int[] imageLibrary;     //array to store image resource id's
+    @SuppressWarnings("CanBeFinal")
     private Context mContext;
     private Animation slideInLeft, slideOutLeft,
             slideInRight, slideOutRight;
