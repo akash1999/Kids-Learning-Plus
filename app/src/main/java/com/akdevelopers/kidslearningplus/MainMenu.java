@@ -18,7 +18,7 @@ public class MainMenu extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(android.R.anim.fade_in, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out_bottom);
         setContentView(R.layout.activity_main_menu);
 
 
