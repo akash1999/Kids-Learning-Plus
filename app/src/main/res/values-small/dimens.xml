@@ -2,7 +2,7 @@
     <!--   MainMenu dimensions          -->
 
     <dimen name="mainMenu_btn_width">100dp</dimen>
-    <dimen name="mainMenu_btn_height">56dp</dimen>
+    <dimen name="mainMenu_btn_height">52dp</dimen>
 
     <!--   abcActivity dimensions       -->
 

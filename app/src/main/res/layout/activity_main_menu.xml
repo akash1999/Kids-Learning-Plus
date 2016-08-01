@@ -23,21 +23,21 @@
             android:layout_height="@dimen/mainMenu_btn_height"
             android:background="@android:color/transparent"
             android:onClick="launchAbcActivity"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/main_menu_button_alphabets" />
 
         <ImageButton
             android:layout_width="@dimen/mainMenu_btn_width"
             android:layout_height="@dimen/mainMenu_btn_height"
             android:background="@android:color/transparent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/main_menu_button_colours" />
 
         <ImageButton
             android:layout_width="@dimen/mainMenu_btn_width"
             android:layout_height="@dimen/mainMenu_btn_height"
             android:background="@android:color/transparent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/main_menu_button_numbers" />
     </LinearLayout>
 </RelativeLayout>
