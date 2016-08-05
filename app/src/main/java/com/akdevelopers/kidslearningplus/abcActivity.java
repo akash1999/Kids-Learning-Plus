@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 public class abcActivity extends Activity {
     private ImageHandler imageBundle;
+    private SoundManager soundManager;
     private GestureDetectorCompat mDetector;
     private boolean isBelowKitkat;
     private View decorView;
@@ -35,6 +36,9 @@ public class abcActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        soundManager = new SoundManager();
+        loadAudio();
+
         decorView = getWindow().getDecorView();
         mDetector = new GestureDetectorCompat(abcActivity.this, new SwipeGesture());
     }
@@ -52,6 +56,8 @@ public class abcActivity extends Activity {
             //Make Navigation bar dim on api 18 and below
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
+
+        soundManager.initialiseIndex(imageBundle.getCurrentIndex());
     }
 
     @Override
@@ -59,6 +65,8 @@ public class abcActivity extends Activity {
         super.onStop();
         mDetector = null;
         decorView = null;
+        soundManager.destroy();
+        soundManager = null;
     }
 
     @Override
@@ -128,6 +136,25 @@ public class abcActivity extends Activity {
         load.start();
     }
 
+
+    private void loadAudio() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                int[] ids = {
+                        R.raw.voice_a, R.raw.voice_b, R.raw.voice_c, R.raw.voice_d, R.raw.voice_e,
+                        R.raw.voice_f, R.raw.voice_g, R.raw.voice_h, R.raw.voice_i, R.raw.voice_j,
+                        R.raw.voice_k, R.raw.voice_l, R.raw.voice_m, R.raw.voice_n, R.raw.voice_o,
+                        R.raw.voice_p, R.raw.voice_q, R.raw.voice_r, R.raw.voice_s, R.raw.voice_t,
+                        R.raw.voice_u, R.raw.voice_v, R.raw.voice_w, R.raw.voice_x, R.raw.voice_y,
+                        R.raw.voice_z};
+                soundManager.load(abcActivity.this, ids);
+            }
+        });
+        t.start();
+    }
+
     // Used to detect Gestures and changing images accordingly
     class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
         private int counter = 0;
@@ -152,9 +179,11 @@ public class abcActivity extends Activity {
 
             if ((e1.getX() - e2.getX()) > sensitivity) {                   //On swiping left
                 imageBundle.mNextImage();
+                soundManager.nextClip();
                 counter = 0;
             } else if ((e2.getX() - e1.getX()) > sensitivity) {            //On swiping right
                 imageBundle.mPrevImage();
+                soundManager.prevClip();
                 counter = 0;
             }
             return true;

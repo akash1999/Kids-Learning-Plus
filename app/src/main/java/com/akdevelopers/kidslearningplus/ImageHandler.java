@@ -85,4 +85,8 @@ class ImageHandler {
             mFrame.setImageResource((imageLibrary[currentImageIndex]));
         }
     }
+
+    public byte getCurrentIndex() {
+        return currentImageIndex;
+    }
 }
