@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Process;
-import android.util.Log;
 
 import java.io.IOException;
 
@@ -173,6 +172,5 @@ public class SoundManager {
         player = null;
         aList = null;
         context = null;
-        Log.d("SoundManager", "Destroyed");
     }
 }
