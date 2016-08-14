@@ -1,4 +1,4 @@
-package com.akdevelopers.kidslearningplus;
+package com.akdevelopers.kidslearning;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.akdevelopers.kidslearning.activityalphabets.abcActivity;
 
 public class MainMenu extends Activity {
 
@@ -81,6 +83,11 @@ public class MainMenu extends Activity {
         Intent abc_Activity = new Intent(this, abcActivity.class);
         startActivity(abc_Activity);
         finish();
+    }
+
+    public void launchCreditsActivity(View view) {
+        Intent credits_activity = new Intent(this, Credits.class);
+        startActivity(credits_activity);
     }
 
 }

@@ -1,9 +1,11 @@
-package com.akdevelopers.kidslearningplus;
+package com.akdevelopers.kidslearning.activityalphabets;
 
 import android.content.Context;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
+
+import com.akdevelopers.kidslearning.R;
 
 
 class ImageHandler {

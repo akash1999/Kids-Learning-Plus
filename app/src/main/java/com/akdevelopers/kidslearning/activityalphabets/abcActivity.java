@@ -1,4 +1,4 @@
-package com.akdevelopers.kidslearningplus;
+package com.akdevelopers.kidslearning.activityalphabets;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+
+import com.akdevelopers.kidslearning.MainMenu;
+import com.akdevelopers.kidslearning.R;
 
 
 public class abcActivity extends Activity {

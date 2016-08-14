@@ -1,7 +1,9 @@
-package com.akdevelopers.kidslearningplus;
+package com.akdevelopers.kidslearning.activityalphabets;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.akdevelopers.kidslearning.R;
 
 public class EasterEgg extends Activity {
 

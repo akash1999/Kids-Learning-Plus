@@ -1,9 +1,11 @@
-package com.akdevelopers.kidslearningplus;
+package com.akdevelopers.kidslearning.activityalphabets;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Process;
+
+import com.akdevelopers.kidslearning.R;
 
 import java.io.IOException;
 
