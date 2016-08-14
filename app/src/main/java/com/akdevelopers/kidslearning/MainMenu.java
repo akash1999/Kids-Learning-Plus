@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.akdevelopers.kidslearning.activityalphabets.abcActivity;
+import com.akdevelopers.kidslearning.activityAlphabets.abcActivity;
 
 public class MainMenu extends Activity {
 
