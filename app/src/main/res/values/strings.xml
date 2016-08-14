@@ -2,4 +2,12 @@
     <string name="app_name">Kids Learning plus</string>
     <string name="background_image">Background Image</string>
     <string name="main_menu_label">Main Menu</string>
+    <string name="credits">Credits</string>
+    <string name="game_design_code">App Design and Code</string>
+    <string name="music">Music</string>
+    <string name="my_name">Akash Chaudhary</string>
+    <string name="music_attr">Life of Riley Kevin MacLeod (incompetech.com)
+    Licensed under Creative Commons: By Attribution 3.0 License</string>
+    <string name="graphics">Graphics</string>
+    <string name="freepic">Background Designed by Freepik</string>
 </resources>

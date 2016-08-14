@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Credits">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/credits_background" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/credits_heading"
+                style="@style/about_us_heading_style"
+                android:text="@string/credits" />
+
+            <TextView
+                android:id="@+id/credits_app_design_code"
+                style="@style/about_us_subheading_style"
+                android:gravity="center"
+                android:paddingTop="50dp"
+                android:text="@string/game_design_code" />
+
+            <TextView
+                style="@style/about_us_body_style"
+                android:paddingTop="16dp"
+                android:text="@string/my_name" />
+
+            <TextView
+                android:id="@+id/credits_music"
+                style="@style/about_us_subheading_style"
+                android:paddingTop="32dp"
+                android:text="@string/music" />
+
+            <TextView
+                style="@style/about_us_body_style"
+                android:gravity="center"
+                android:maxWidth="400dp"
+                android:paddingTop="16dp"
+                android:text="@string/music_attr" />
+
+            <TextView
+                android:id="@+id/credits_graphics"
+                style="@style/about_us_subheading_style"
+                android:paddingTop="32dp"
+                android:text="@string/graphics" />
+
+            <TextView
+                style="@style/about_us_body_style"
+                android:paddingTop="16dp"
+                android:text="@string/my_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:text="@string/freepic"
+                android:textColor="#9E9E9E"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

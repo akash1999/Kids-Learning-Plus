@@ -1,4 +1,4 @@
-package com.akdevelopers.kidslearning.activityalphabets;
+package com.akdevelopers.kidslearning.activityAlphabets;
 
 import android.app.Activity;
 import android.os.Bundle;

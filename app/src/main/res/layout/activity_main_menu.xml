@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.akdevelopers.kidslearningplus.MainMenu">
+    tools:context="com.akdevelopers.kidslearning.MainMenu">
 
     <ImageView
         android:layout_width="match_parent"
@@ -40,4 +40,13 @@
             android:scaleType="centerCrop"
             android:src="@drawable/main_menu_button_numbers" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:onClick="launchCreditsActivity"
+        android:text="@string/credits" />
 </RelativeLayout>
